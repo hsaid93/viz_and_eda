@@ -1,0 +1,88 @@
+---
+title: "Visualization"
+output: github_document
+---
+
+```{r}
+library(tidyverse)
+library(ggridges)
+
+library(p8105.datasets)
+data("weather_df")
+```
+
+Now we have everything we need!
+
+```{r}
+weather_df
+```
+
+Let's make a scatter plot
+
+```{r}
+ggplot(weather_df, aes(x = tmin, y = tmax)) +
+  geom_point()
+```
+
+I always like the dataframe first
+
+```{r}
+ggp_temp_scatterplpt = 
+weather_df |> 
+  ggplot(aes(x = tmin, y = tmax)) +
+  geom_point()
+
+ggp_temp_scatterplpt
+```
+
+Let's make this a bit fancier
+The aestheetics are up to you
+
+```{r}
+weather_df |> 
+  ggplot(aes(x = tmin, y = tmax, color = name)) + 
+  geom_point(aes(color = name), alpha = 0.25) + 
+  geom_smooth(se = FALSE)
+```
+
+Show faceting
+
+```{r}
+weather_df |> 
+  ggplot(aes(x = tmin, y = tmax, color = name)) + 
+  geom_point(alpha = 0.5) +
+  facet_grid(. ~ name)
+```
+
+Newer interface:
+```{r}
+weather_df |> 
+  ggplot(aes(x = tmin, y = tmax, color = name)) + 
+  geom_point(alpha = 0.5) +
+  facet_grid(cols = vars(name))
+```
+
+
+Let's look at something else. 
+
+```{r}
+weather_df |> 
+  ggplot(aes(x = date, y = tmax, color = name)) + 
+  geom_point(aes(size = prcp, alpha = 0.5)) + 
+  geom_smooth(se = FALSE) +
+  facet_grid((. ~ name))
+```
+
+make a plot of central park tmax vs tmin only, and covert temperatures to fahrenheit 
+
+```{r}
+weather_df |>
+  filter(name == "CentralPark_NY") |>
+  mutate(
+    tmax = tmax * (9 / 5) + 32,
+    tmin = tmin * (9 / 5) + 32
+  ) |>
+  ggplot(aes(x = tmin, y = tmax)) +
+  geom_point()
+```
+
