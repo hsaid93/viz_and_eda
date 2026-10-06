@@ -136,3 +136,61 @@ weather_df |>
     ## (`geom_point()`).
 
 ![](02_viz-copy_files/figure-gfm/unnamed-chunk-7-1.png)<!-- -->
+
+### Two more weird but useful plot things
+
+``` r
+central_park_df = 
+    weather_df |> 
+  filter(name == "CentralPark_NY")
+
+molokai_df = 
+    weather_df |> 
+  filter(name == "Molokai_HI")
+
+ggplot(molokai_df, aes(x = date, y = tmax, color = name)) + 
+  geom_point() +
+  geom_line(data = central_park_df)
+```
+
+    ## Warning: Removed 1 row containing missing values or values outside the scale range
+    ## (`geom_point()`).
+
+![](02_viz-copy_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
+
+multple panels with different plots
+
+``` r
+library(patchwork)
+
+ggp_tmax_tmin =
+  weather_df |>
+  ggplot(aes(x = tmin, y = tmax, color = name)) +
+  geom_point() +
+  theme(legend.position = "none")
+
+ggp_prcp_density =
+  weather_df |>
+  ggplot(aes(x = prcp, fill = name)) +
+  geom_density(alpha = 0.5) +
+  theme(legend.position = "none")
+
+ggp_seasonal =
+  weather_df |>
+  ggplot(aes(x = date, y = tmax, color = name)) +
+  geom_point() +
+  theme(legend.position = "none")
+
+(ggp_tmax_tmin + ggp_prcp_density) / ggp_seasonal
+```
+
+    ## Warning: Removed 17 rows containing missing values or values outside the scale range
+    ## (`geom_point()`).
+
+    ## Warning: Removed 15 rows containing non-finite outside the scale range
+    ## (`stat_density()`).
+
+    ## Warning: Removed 17 rows containing missing values or values outside the scale range
+    ## (`geom_point()`).
+
+![](02_viz-copy_files/figure-gfm/unnamed-chunk-9-1.png)<!-- -->
