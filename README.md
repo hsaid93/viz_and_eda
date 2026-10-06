@@ -1,1 +1,3 @@
-# viz_and_eda
+# Visualization and EA
+
+This is code for P8105
