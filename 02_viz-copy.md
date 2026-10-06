@@ -84,3 +84,55 @@ weather_df |>
     ## (`geom_point()`).
 
 ![](02_viz-copy_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
+
+## Themes
+
+``` r
+weather_df |>
+  ggplot(aes(x = tmax, y = tmin, color = name)) +
+  geom_point() +
+  viridis::scale_color_viridis(
+    name = "Location",
+    discrete = TRUE
+  ) +
+  theme(legend.position = "bottom")
+```
+
+    ## Warning: Removed 17 rows containing missing values or values outside the scale range
+    ## (`geom_point()`).
+
+![](02_viz-copy_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
+
+``` r
+weather_df |>
+  ggplot(aes(x = tmax, y = tmin, color = name)) +
+  geom_point() +
+  viridis::scale_color_viridis(
+    name = "Location",
+    discrete = TRUE
+  ) +
+  theme_minimal() + 
+  theme(legend.position = "bottom")
+```
+
+    ## Warning: Removed 17 rows containing missing values or values outside the scale range
+    ## (`geom_point()`).
+
+![](02_viz-copy_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
+
+``` r
+weather_df |>
+  ggplot(aes(x = tmax, y = tmin, color = name)) +
+  geom_point() +
+  viridis::scale_color_viridis(
+    name = "Location",
+    discrete = TRUE
+  ) +
+  theme_classic() + 
+  theme(legend.position = "bottom")
+```
+
+    ## Warning: Removed 17 rows containing missing values or values outside the scale range
+    ## (`geom_point()`).
+
+![](02_viz-copy_files/figure-gfm/unnamed-chunk-7-1.png)<!-- -->

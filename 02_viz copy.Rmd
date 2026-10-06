@@ -55,3 +55,38 @@ weather_df |>
 
 ```
 
+## Themes
+```{r}
+weather_df |>
+  ggplot(aes(x = tmax, y = tmin, color = name)) +
+  geom_point() +
+  viridis::scale_color_viridis(
+    name = "Location",
+    discrete = TRUE
+  ) +
+  theme(legend.position = "bottom")
+```
+
+```{r}
+weather_df |>
+  ggplot(aes(x = tmax, y = tmin, color = name)) +
+  geom_point() +
+  viridis::scale_color_viridis(
+    name = "Location",
+    discrete = TRUE
+  ) +
+  theme_minimal() + 
+  theme(legend.position = "bottom")
+```
+
+```{r}
+weather_df |>
+  ggplot(aes(x = tmax, y = tmin, color = name)) +
+  geom_point() +
+  viridis::scale_color_viridis(
+    name = "Location",
+    discrete = TRUE
+  ) +
+  theme_classic() + 
+  theme(legend.position = "bottom")
+```
